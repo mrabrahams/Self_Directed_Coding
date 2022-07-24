@@ -1,0 +1,59 @@
+# Take four digits from the user. If the user does not enter four digits print "invalid input try again.  If user does not enter numbers print "invalid input, try agin. 
+# Rearrange the digits to get the largest number and print it. 
+# Rearrange the digits to get the smallest number and print it.
+# subtract the smallest number from the largest number and print it.
+# Check if the number = 6174 and print "The number is a Kaprekar number"
+# if not, take the result of the subtraction and start over.
+
+def kaprekar_calc(num, increment):
+    count = increment + 1 # count the number of times it takes to get to 6174
+    # rearrange the digits to get the smallest number
+    user_numbers_large = list(num)
+    user_numbers_large.sort(reverse=True)
+    user_numbers_large = "".join(user_numbers_large)
+    print("The largest number is: " + user_numbers_large)
+    # rearrange the digits to get the largest number
+    user_numbers_small = list(num)
+    user_numbers_small.sort() # sort the list
+    user_numbers_small = "".join(user_numbers_small) # join the list into a string
+    print("The smallest number is: " + user_numbers_small)
+    # subtract the smallest number from the largest number
+    user_numbers_result = int(user_numbers_large) - int(user_numbers_small) # convert to int and subtract
+    print("The difference is: " + str(user_numbers_result))
+    if user_numbers_result == 6174:
+        print("The number is a Kaprekar number")
+        print("it took " + str(count) + " iterations to get the number 6147")
+    else:
+        kaprekar_calc(str(user_numbers_result), count)
+''' # check if the number = 6174 and print "The number is a Kaprekar number"
+        if user_numbers == 6174:
+            print("The number is a Kaprekar number")
+        else:
+            # if not, take the result of the subtraction and start over.
+            user_numbers = user_numbers - int(user_numbers[0])
+            print("The difference is: " + str(user_numbers))
+            kaprekar_calc(user_numbers)'''
+
+def user_input():
+    # take four digits from the user
+    user_numbers = input("Enter four digits: ")
+    # check if the user entered four digits
+    if len(user_numbers) != 4:
+        print("Invalid input, try again.")
+        user_input()
+    # if user did not enter numbers print "invalid input, try again.
+    elif user_numbers.isdigit() == False:
+        print("Invalid input, try again.")
+        user_input()
+    # if user enters four similar digits print "invalid input, try again.
+    elif user_numbers[0] == user_numbers[1] == user_numbers[2] == user_numbers[3]:
+        print("Invalid input, try again.")
+        user_input()
+    # if user did enter numbers, start the calculation
+    else:
+        # increment the count
+        increment = 0
+        kaprekar_calc(user_numbers, increment)
+
+if __name__ == "__main__": 
+    user_input()
